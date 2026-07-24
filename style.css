@@ -1,0 +1,453 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Allow Vertical Scroll on Small Heights */
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+body {
+  background: linear-gradient(-45deg, #050508, #0a0814, #120c1f, #07070a);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #ffffff;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Utilities */
+.hidden {
+  display: none !important;
+}
+
+.hidden-card {
+  display: none !important;
+  opacity: 0;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: pointer;
+  padding: 20px;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+}
+
+.overlay-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-startup {
+  width: 80px;
+  height: auto;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.15));
+}
+
+.glow-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.sub-text {
+  font-size: 1rem;
+  color: #a1a1aa;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+/* Main UI Layout */
+.main-ui {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 20px 100px 20px; /* Bottom padding so ticker doesn't overlap on scroll */
+  position: relative;
+  transition: opacity 0.8s ease;
+}
+
+/* Header */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 5;
+  animation: fadeInDown 0.8s ease backwards 0.3s;
+  margin-bottom: 30px;
+}
+
+.logo-header {
+  width: 36px;
+  height: auto;
+}
+
+.header-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Card Container */
+.card-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Solid Non-Shrinking Card */
+.card {
+  background: rgba(18, 18, 24, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 2.5rem 2rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card.invalid-shake {
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.card h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #f4f4f5;
+}
+
+.card-header-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Buttons & Inputs */
+.button-stack,
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.select-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  color: #e4e4e7;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.select-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.select-btn.active {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+}
+
+.text-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.text-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+}
+
+.text-input.input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.25) !important;
+}
+
+.text-input::placeholder {
+  color: #71717a;
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-align: left;
+  margin-top: 2px;
+  padding-left: 4px;
+}
+
+.hidden-error {
+  display: none;
+}
+
+.continue-btn {
+  width: 100%;
+  height: 48px;
+  padding: 12px;
+  background: #6366f1;
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.continue-btn:hover:not(:disabled) {
+  background: #4f46e5;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+.continue-btn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fixed Bottom Music Ticker */
+.music-ticker {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(18, 18, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  font-size: 0.85rem;
+  color: #a1a1aa;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 999;
+  max-width: calc(100vw - 40px);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+}
+
+.music-ticker.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Centered Button with Grid */
+.control-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  margin: 0;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.icon-svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  fill: currentColor;
+}
+
+#play-icon {
+  transform: translateX(1px);
+}
+
+.song-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time-display {
+  font-variant-numeric: tabular-nums;
+  color: #71717a;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* Animations */
+.card-animate-out {
+  animation: cardOut 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.card-animate-in {
+  animation: cardIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+/* Mobile Ticker Adjustments */
+@media (max-width: 480px) {
+  .music-ticker {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+  }
+}
