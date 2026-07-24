@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BaconCheatz</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Fullscreen Initial Overlay -->
+    <div id="overlay" class="overlay">
+      <div class="overlay-content">
+        <img
+          src="https://i.ibb.co/1JqpXXW5/image.png"
+          class="logo-startup"
+          alt="BaconCheatz Logo"
+        />
+        <h1 class="glow-title">BaconCheatz</h1>
+        <p class="sub-text">Click anywhere to enter</p>
+      </div>
+    </div>
+
+    <!-- Main View Area -->
+    <div id="main-ui" class="main-ui hidden">
+      <!-- Header: Logo and Title -->
+      <header class="main-header">
+        <img
+          src="https://i.ibb.co/1JqpXXW5/image.png"
+          class="logo-header"
+          alt="BaconCheatz Logo"
+        />
+        <h1 class="header-title">BaconCheatz</h1>
+      </header>
+
+      <!-- Center Container for Cards -->
+      <div class="card-container">
+        <!-- Step 1: Selection Card -->
+        <main id="step1-card" class="card">
+          <h2>How did you find us?</h2>
+          <div class="button-stack">
+            <button class="select-btn" data-value="scriptverse">
+              <img
+                src="https://scriptverse.net/favicon-32.png?v=afa0d48aea"
+                class="btn-icon"
+                alt="Scriptverse"
+              />
+              <span>Scriptverse</span>
+            </button>
+            <button class="select-btn" data-value="discord">
+              <img
+                src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                class="btn-icon"
+                alt="Discord"
+              />
+              <span>Discord</span>
+            </button>
+          </div>
+          <div id="step1-error" class="error-text hidden-error">
+            Please select an option to continue.
+          </div>
+          <button id="continue-step1" class="continue-btn">
+            <span class="btn-text">Continue</span>
+            <span class="spinner hidden"></span>
+          </button>
+        </main>
+
+        <!-- Step 2: Scriptverse Input Card -->
+        <main id="scriptverse-card" class="card hidden-card">
+          <div class="card-header-icon">
+            <img
+              src="https://scriptverse.net/favicon-32.png?v=afa0d48aea"
+              alt="Scriptverse"
+              class="form-logo"
+            />
+            <h2>Scriptverse Account</h2>
+          </div>
+          <div class="input-group">
+            <input
+              type="text"
+              id="scriptverse-input"
+              class="text-input"
+              placeholder="https://scriptverse.net/u/username"
+              autocomplete="off"
+            />
+            <div id="scriptverse-error" class="error-text hidden-error">
+              Please provide a valid Scriptverse profile link.
+            </div>
+          </div>
+          <button id="continue-scriptverse" class="continue-btn">
+            <span class="btn-text">Continue</span>
+            <span class="spinner hidden"></span>
+          </button>
+        </main>
+
+        <!-- Step 2: Discord Input Card -->
+        <main id="discord-card" class="card hidden-card">
+          <div class="card-header-icon">
+            <img
+              src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+              alt="Discord"
+              class="form-logo"
+            />
+            <h2>Discord User ID</h2>
+          </div>
+          <div class="input-group">
+            <input
+              type="text"
+              id="discord-input"
+              class="text-input"
+              placeholder="e.g. 123456789012345678"
+              autocomplete="off"
+            />
+            <div id="discord-error" class="error-text hidden-error">
+              Please enter a valid Discord User ID.
+            </div>
+          </div>
+          <button id="continue-discord" class="continue-btn">
+            <span class="btn-text">Continue</span>
+            <span class="spinner hidden"></span>
+          </button>
+        </main>
+      </div>
+    </div>
+
+    <!-- Music Player Ticker Card -->
+    <div id="music-ticker" class="music-ticker">
+      <button id="play-pause-btn" class="control-btn" aria-label="Play/Pause">
+        <svg
+          id="pause-icon"
+          class="icon-svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
+        </svg>
+        <svg
+          id="play-icon"
+          class="icon-svg hidden"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </button>
+      <span class="song-title">Playing: Bikinis & Swimshorts - SUPERARE</span>
+      <span id="audio-time" class="time-display">0:00/0:00</span>
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="bg-music" src="song.mp3" loop></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
